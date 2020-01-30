@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorLighter">#3E3C3E</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorHomeBackround1">#F0EEF0</color>
+    <color name="colorHomeBackround2">#D7D5D7</color>
+    <color name="colorHomeBackround3">#BEBCBE</color>
+    <color name="colorHomeBackround4">#A4A2A4</color>
+    <color name="colorHomeBackroundDirty">#E8E4C9</color>
+    <color name="colorHomeBackroundGhost">#F8F8FF</color>
+
+    <color name="colorGray">#585658</color>
+    <color name="colorGray2">#0B090B</color>
+</resources>

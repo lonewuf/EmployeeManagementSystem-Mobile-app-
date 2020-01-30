@@ -1,0 +1,23 @@
+-.gradle
+-/local.properties
+-/.idea/workspace.xml
+Add a comment to this line
+-/.idea/libraries
+-.DS_Store
+-/build
+-/captures
+-gen
+-build
+-.idea
+build
+/WeatherNationTab.iml
+/app/app.iml
+/wn-tablet.iml
+.gradle
+.idea
+/local.properties
+/DragNDrop/DragNDrop.iml
+/DB
+/Ermscore
+/Server
+README.md
