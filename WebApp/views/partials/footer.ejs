@@ -1,0 +1,91 @@
+<% if(user.admin == 1) {%>
+  <!-- Register employee MODAL -->
+  <div class="modal fade text-dark" id="sign-upModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sign-upModalTitle">Register Here</h5>
+          <button class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          
+          <form action="/register" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <label >Name</label>
+              <input type="text" name="name" class="form-control" id="validationCustom01" placeholder="Whole Name"  required>
+            </div>
+ 
+            <div class="form-group">
+              <label >Company ID</label>
+              <input type="text" name="company_num" class="form-control" " placeholder="Company ID" required>
+          </div>
+
+          <div class="form-group">
+              <label >Address</label>
+              <input type="text" name="address" class="form-control" " placeholder="Address" required>
+          </div>
+
+          <div class="form-group">
+              <label >Phone Number</label>
+              <input type="text" name="phone_number" class="form-control"  placeholder="Phone Number" required>
+          </div>
+
+          <div class="form-group">
+              <label >Email Address</label>
+              <input type="email" name="email" class="form-control"  placeholder="Email Address" required>
+          </div>
+          <div class="form-group">
+            <label for="">Image</label>
+            <input type="file" class="form-control" name="image" id="img">
+            <img src="#" id="imgPreview" alt="">
+        </div>
+          </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit Form</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% } %>
+
+
+  
+  <!-- FOOTER -->
+  <footer id="main-footer" class="p-5 bg-dark text-white">
+    sadads</footer>
+  </div>
+  
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.js"></script>
+  <script>
+    $('.port-item').click(function(){
+      $('.collapse').collapse('hide');
+    });
+
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+  </script>
+  <script>
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              
+              reader.onload = function(e) {
+                  $("#imgPreview").attr('src', e.target.result).width(100).height(100);
+              }
+              
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+      
+      $("#img").change(function() {
+          readURL(this);
+      });
+    </script>
+</body>
+</html>

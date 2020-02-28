@@ -1,0 +1,243 @@
+<% include ../partials/header %>
+
+<div class="container mt-5">
+    <header id="main-header">
+      <div class="row no-gutters">
+        <div class="col-lg-4 col-md-5">
+          <img src="/img/personn.jpg">
+        </div>
+        <div class="col-lg-8 col-md-7">
+          <div class="d-flex flex-column">
+            <div class="p-5 bg-dark text-white">
+              <div class="name d-flex flex-row justify-content-between align-items-center">
+                <h1 class="display-4"><%= user.name %></h1>
+              </div>
+            </div>
+
+            <div class="p-4 bg-black">
+              Company ID: <%= user.company_num %>
+            </div>
+
+            <div>
+              <div class="d-flex flex-row text-white align-items-stretch text-center">
+                <div class="port-item p-4 bg-danger" data-toggle="collapse" data-target="#RDTR">
+                  <i class="fa fa-tasks d-block"></i>Reports records 
+                </div>
+                <div class="port-item p-4 bg-success" data-toggle="collapse" data-target="#RSVL">
+                  <i class="fa fa-address-book d-block"></i>Leaves records
+                </div>
+                <div class="port-item p-4 bg-primary" data-toggle="collapse" data-target="#REP">
+                  <i class="fa fa-vcard-o d-block"></i>Profile records
+                </div>
+                <div class="port-item p-4 bg-warning" data-toggle="collapse" data-target="#RRV">
+                  <i class="fa fa-envelope-open d-block"></i>Registration Verification
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+  <!-- RECORDS OF REPORT INSERTED IN EMPLOYEES ACCOUNT -->
+    <div id="RDTR" class="collapse show">
+      <div class="card card-body bg-danger text-white py-5">
+        <h2>Records of Reports</h2>
+        <p>Employees reports and activities will be stored here.</p>
+      </div>
+
+      <div class="card card-body py-5">
+        <div class="card-deck">
+          <div class="container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-center">Complete Name</th>
+                  <th class="text-center">Date Submitted</th>
+                  <th class="text-center">Date Report</th>
+                  <th class="text-center">Reports</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% foundReports.forEach(report => {%>
+                <tr>
+                  <td class="text-center"><a href="/profile/user/<%= report.employee._id %>" target="_blank"><%= report.employee.name %></a></td>
+                  <td class="text-center"><%= report.date_logged.toLocaleString()%></td>
+                  <td class="text-center"><%= report.year %>-<%= report.month %>-<%= report.day %></td>
+                  <% if(report.file && report.report) { %>
+                    <td><%= report.report %> <br>
+                      <a href="/employee_images/<%= report.employee._id %>/files/<%= report.file %>" target="_blank"
+                        download="<%= report.employee.name %>-<%= report.employee.company_num %>-(<%= report.month %>-<%= report.day %>-<%= report.year %>)">
+                        Download report
+                    </a>
+                    </td>
+                  <% } else if(report.file) { %>
+                    <td><a href="/employee_images/<%= report.employee._id %>/files/<%= report.file %>" target="_blank"
+                      download="<%= report.employee.name %>-<%= report.employee.company_num %>-(<%= report.month %>-<%= report.day %>-<%= report.year %>)"
+                      >
+                      Download report
+                    </a></td>
+                  <% } else { %>
+                    <td><%= report.report %></td>
+                  <% } %>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECORDS OF LEAVES INSERTED EMPLOYEES ACCOUNT --> 
+    <div id="RSVL" class="collapse">
+      <div class="card card-body bg-success text-white py-5">
+        <h2>Attendance and Leaves Records</h2>
+        <p>Sick and Vacation Leaves are recorded here.</p>
+      </div>
+
+      <div class="card card-body py-5">
+        <div class="card-deck">
+          <div class="container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Complete Name</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Type of leave</th>
+                  <th>Days Leave</th>
+                  <th>Leaves Reason</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% foundLeaves.forEach(leave => {%>
+                  <tr>
+                    <td class="text-center"><a href="/profile/user/<%= leave.employee._id %>" target="_blank"><%= leave.employee.name %></a></<td>
+                    <td><%= leave.date_from.toLocaleString() %></td>
+                    <td><%= leave.date_to.toLocaleString() %></td>
+                    <% if(leave.type_leave == 'sick_leave') { %>
+                      <td >Sick Leave</td>
+                    <% } else if (leave.type_leave == 'vacation_leave'){ %>
+                      <td >Vacation Leave</td>
+                    <% } %>
+                    <td><%= leave.days_leave %></td>
+                    <td><%= leave.reason %></td>
+                    <td>
+                    <form action="/admin/approve-leave/<%= leave._id %>" method="post"><button type="submit" class="btn btn-success btn-sm">Approve</button></form>
+                    <form action="/admin/disapprove-leave/<%= leave._id %>" method="post"><button type="submit" class="btn btn-danger btn-sm">Disapprove</button></form>
+                    </td>
+                  </tr>
+                <% }) %>
+                
+                </tbody>
+            </table>
+
+            <table class="table table-bordered mt-5">
+                <thead>
+                  <tr>
+                    <th>Complete Name</th>
+                    <th>Total Sick Leave</th>
+                    <th>Total Vacation Leave</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% foundUsers.forEach(user => {%>
+                    <tr>
+                      <td class="text-center"><a href="/profile/user/<%= user._id %>" target="_blank"><%= user.name %></a></td>
+                      
+                      <td class="text-center"><%= user.sick_leave %></td>
+                      <td class="text-center"><%= user.vacation_leave %></td>
+                    </tr>
+                  <% }) %>
+                  
+                  </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+    <!-- RECORDS OF EMPLOYEES PROFILE -->
+    <div id="REP" class="collapse">
+      <div class="card card-body bg-primary text-white py-5">
+        <h2>Welcome!</h2>
+        <p>Records of Employees (Records, History, Skills, etc.).</p>
+      </div>
+
+       <div class="card card-body py-5">
+        <div class="card-deck">
+          <div class="container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-center">Complete Name</th>
+                  <th class="text-center">Company ID</th>          
+                </tr>
+              </thead>
+                <tbody>
+                <% foundUsers.forEach(user => {%>
+                  <tr>
+                    <td class="text-center"><a href="/profile/user/<%= user._id %>" target="_blank"><%= user.name %></a></td>
+                    <td class="text-center"><a href="/profile/user/<%= user._id %>" target="_blank"><%= user.company_num %></a> &nbsp;&nbsp;
+                    <a href="/delete-emp/<%= user._id %>" class="btn btn-danger">Delete</a>
+                    </td>
+                  </tr>
+                <% }) %>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- RECORDS OF REGISTRATION VERIFICATION -->
+    <div id="RRV" class="collapse">
+      <div class="card card-body bg-warning text-white py-5">
+        <h2>Records of Reports</h2>
+        <p>Employees reports and activities will be stored here.</p>
+      </div>
+
+      <a href="/admin/generate-employee-number" class="btn btn-primary my-2">Generate Employee Number</a>
+
+      <div class="card card-body py-5">
+        <div class="card-deck">
+          <div class="container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-center">Company ID</th>
+                  <th class="text-center">Used</th>
+                  <th class="text-center">Send to</th>
+                </tr>
+                <tbody>
+                <% foundCompanyID.forEach(id => {%>
+                  <% if(id.used) {%>
+                    <tr>
+                      <td class="text-center" ><a href="/profile/user/<%= id._id %>"><%= id._id %></a></td>
+                      <td class="text-center">Yes</td>
+                      <td></td>
+                    </tr>
+                  <% } else { %>
+                    <tr>
+                      <td class="text-center"><%= id._id %></td>
+                      <td class="text-center">No</td>
+                      <td>
+                        <form action="/admin/send-company-id/<%= id._id %>" method="POST" class="form-inline justify-content-around">
+                            <input placeholder="Email" class="form-control mr-2" type="email" name="email">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                      </td>
+                    </tr>
+                  <% } %>
+                <% }) %>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer %>

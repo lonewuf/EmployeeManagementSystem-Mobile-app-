@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ERMSCORE</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.css" />
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/styleuser.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-black navbar-dark fixed-top ">
+    <div class="container">
+      <img style="max-width: 180px; margin-top: -4px; margin-left: -100px;" src="/img/logo.png" alt="logo">&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/profile" class="navbar-brand"><h4><strong>ERMSCORE</strong></h4></a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <% if(user.admin == 1) {%>
+            
+          <li>
+            <a href="/admin" class="nav-link">Admin Area</a>
+          </li>
+          <li>
+            <a href="#" data-toggle="modal" data-target="#sign-upModal" class="nav-link">Register New Employee</a>
+          </li>
+          <% } %>
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">Sign out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mt-5">
+    <p class="text-white">sad</p>
+  </div>
+
+  <div class="container">
+      <%- messages('messages', locals) %>
+  </div>
+  
+  <% if(errors) {%>
+    <% errors.forEach(err => { %>
+      <div class="container">
+        <div class="alert alert-danger">
+          <%= err.msg %>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
