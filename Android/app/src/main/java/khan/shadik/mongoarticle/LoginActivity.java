@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserLoggedIn> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Incorrect Credentials" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Connection Error Occur" , Toast.LENGTH_SHORT).show();
             }
         });
     }

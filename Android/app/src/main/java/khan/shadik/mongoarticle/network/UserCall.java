@@ -16,19 +16,19 @@ import retrofit2.http.POST;
 
 public interface UserCall {
 
-    @POST("login")
+    @POST("login-mobile-call")
     Call<UserLoggedIn> login(@Body Login login);
 
     @GET("profile/samplehere")
     Call<ResponseBody> sampleCallLeave(@Header("Authorization") String authToken);
 
-    @GET("profile/user")
+    @GET("profile/user-mobile-call")
     Call<User> getCurrentUserProfile(@Header("Authorization") String authToken);
 
-    @POST("profile/leaves")
+    @POST("profile/leaves-mobile-call")
     Call<InsertLeaveCall> postLeave(@Header("Authorization") String authToken, @Body InsertLeave insertLeave);
 
-    @POST("profile/insert-report")
+    @POST("profile/insert-report-mobile-call")
     Call<InsertReportCall> postReport(@Header("Authorization") String authToken, @Body InsertReport insertReport);
 
     @GET("current")

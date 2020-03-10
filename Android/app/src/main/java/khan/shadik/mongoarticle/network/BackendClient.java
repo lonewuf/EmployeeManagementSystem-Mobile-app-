@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class BackendClient {
 
-    public static final String BASE_URL = "http://192.168.43.209:4000/";
+    public static final String BASE_URL = "https://ermscore-mobile.herokuapp.com/";
 
     public static <T> T createRetrofitService(final Class<T> clazz) {
         final Gson gson = new GsonBuilder()

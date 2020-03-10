@@ -20,6 +20,7 @@ build
 /DragNDrop/DragNDrop.iml
 /DB
 /Ermscore
-/Server
-/WebApp/node_modules
+Server
+WebApp
+/Engine
 README.md
